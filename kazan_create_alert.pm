@@ -8,12 +8,26 @@ use Gtk3 -init;
 our @ISA= qw( Exporter );
 
 # these CAN be exported.
-our @EXPORT_OK = qw( export_me export_me_too );
+our @EXPORT_OK = qw( export_gui export_me_too );
 
 # these are exported by default.
-our @EXPORT = qw( export_me );
+our @EXPORT = qw( export_gui );
 
-sub export_me {
+sub export_gui {
+
+   my $message=undef;	
+
+   foreach my $loop (@ARGV) { 
+         if ( grep{/--message/i} $loop)
+         {
+             $message = (split /=/, $loop) [1];
+                
+         }   
+
+
+} 
+
+
     # stuff
     my $window = Gtk3::Window->new ('toplevel');
 #$window->set_deletable (0);
@@ -22,7 +36,7 @@ sub export_me {
 $window->signal_connect (delete_event => sub { Gtk3->main_quit });
 #$window->signal_connect (delete_event => \&Gtk3::Widget::hide_on_delete);
 #$window->set_default_size (400,600);
-my $label = Gtk3::Label->new("alert");
+my $label = Gtk3::Label->new($message);
 
 	
 $window->add ($label);
