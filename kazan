@@ -5,4 +5,7 @@ use warnings;
 
 use kazan_create_alert;  # import default list of items.
 
+grep {/--type=/i} @ARGV or die "--type  dont defided in paramters list\n";
+
+
 export_me( 1 );
