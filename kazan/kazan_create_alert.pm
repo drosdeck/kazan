@@ -20,6 +20,7 @@ sub export_gui {
    my $height=100;
    my $width=100;
    my $unclose=1;
+   my $button_title="Exit";
    #TODO trocar esse caminho para o caminho absoluto
    my $icon_img="/usr/share/kazan/icons/dialog-warning.png";
    foreach my $loop (@ARGV) { 
@@ -44,9 +45,13 @@ sub export_gui {
              $width = (split /=/, $loop) [1];
                 
          }
-         if ( grep{/--title=/i} $loop)
+          if ( grep{/--title=/i} $loop)
          {
              $title = (split /=/, $loop) [1];
+                
+         }  if ( grep{/--button=/i} $loop)
+         {
+             $button_title = (split /=/, $loop) [1];
                 
          }  
          if ( grep{/--unclose=/i} $loop)
@@ -85,7 +90,7 @@ $window->set_default_size ($width,$height);
 $window->set_title($title);
 $window->set_border_width(5);
 
-my $button_ok = Gtk3::Button->new("teste");
+my $button_ok = Gtk3::Button->new($button_title);
 my $box_base = Gtk3::VBox->new(0, 0);
 my $box_head = Gtk3::VBox->new(0, 0);
 my $box_button = Gtk3::HBox->new(0, 0);

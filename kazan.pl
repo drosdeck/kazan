@@ -27,6 +27,7 @@ sub usage{
         \t--width
         \t--icon
         \t--title
+        \t--button
         \t--unclose\n";
   print  "\nexample: "; 
    print "/kazan.pl --type=alert --message=message --title=my_title\n";
