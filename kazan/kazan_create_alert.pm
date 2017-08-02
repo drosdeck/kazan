@@ -21,6 +21,7 @@ sub export_gui {
    my $width=100;
    my $unclose=1;
    my $check=1;
+   my $check_label="check where";
    my $button_title="Exit";
    my $icon_img="/usr/share/kazan/icons/dialog-warning.png";
    foreach my $loop (@ARGV) { 
@@ -66,11 +67,12 @@ sub export_gui {
          }
          if ( grep{/--check=/i} $loop)
          {
-             $check = (split /=/, $loop) [1];
-             $check =~tr/a-z/A-Z/;
-
-            if ($check eq "FALSE"){$check = 1}
-            if ($check eq "TRUE"){$check = 0}
+             $check_label = (split /=/, $loop) [1];
+             #$check =~tr/a-z/A-Z/;
+             $check = 0;
+              
+           # if ($check eq "FALSE"){$check = 1}
+            #if ($check eq "TRUE"){$check = 0}
 
                         
          }
@@ -98,7 +100,7 @@ my $box_head = Gtk3::VBox->new(0, 0);
 my $box_button = Gtk3::HBox->new(0, 0);
 my $label = Gtk3::Label->new($message);
 my $icon = Gtk3::Image->new_from_file($icon_img); 
- my $checkbutton = Gtk3::CheckButton->new_with_label("teste");
+ my $checkbutton = Gtk3::CheckButton->new_with_label($check_label);
 #   $label->set_justify('left');
      #$box_head->pack_start($icon, 1, 0, 0);
      $box_head->pack_start($icon, 0, 0, 0);
