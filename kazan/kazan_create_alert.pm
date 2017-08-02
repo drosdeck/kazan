@@ -20,6 +20,8 @@ sub export_gui {
    my $height=100;
    my $width=100;
    my $unclose=1;
+   #TODO trocar esse caminho para o caminho absoluto
+   my $icon_img="/usr/share/kazan/icons/dialog-warning.png";
    foreach my $loop (@ARGV) { 
          if ( grep{/--message/i} $loop)
          {
@@ -31,7 +33,12 @@ sub export_gui {
          {
              $height = (split /=/, $loop) [1];
                 
-         } 
+         }
+           if ( grep{/--icon=/i} $loop)
+         {
+             $icon_img = (split /=/, $loop) [1];
+                
+         }  
           if ( grep{/--width=/i} $loop)
          {
              $width = (split /=/, $loop) [1];
@@ -66,19 +73,26 @@ sub export_gui {
 
 } 
 
-
+     
     # stuff
     my $window = Gtk3::Window->new ('toplevel');
+
 $window->set_deletable ($unclose);
   #delete_event => \&Gtk2::Widget::hide_on_delete
 $window->signal_connect (delete_event => sub { exit 0 });
 #$window->signal_connect (delete_event => \&Gtk3::Widget::hide_on_delete);
 $window->set_default_size ($width,$height);
 $window->set_title($title);
-my $label = Gtk3::Label->new($message);
 
-	
-$window->add ($label);
+my $box_base = Gtk3::VBox->new(0, 0);
+my $label = Gtk3::Label->new($message);
+my $icon = Gtk3::Image->new_from_file($icon_img); 
+#   $label->set_justify('left');
+     $box_base->pack_start($icon, 1, 0, 0);
+     $box_base->pack_start($label, 1, 0, 0);
+
+print  `pwd`;	
+$window->add ($box_base);
 $window->show_all;
 Gtk3->main;
 }
