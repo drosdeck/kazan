@@ -83,15 +83,23 @@ $window->signal_connect (delete_event => sub { exit 0 });
 #$window->signal_connect (delete_event => \&Gtk3::Widget::hide_on_delete);
 $window->set_default_size ($width,$height);
 $window->set_title($title);
+$window->set_border_width(5);
 
+my $button_ok = Gtk3::Button->new("teste");
 my $box_base = Gtk3::VBox->new(0, 0);
+my $box_head = Gtk3::VBox->new(0, 0);
+my $box_button = Gtk3::HBox->new(0, 0);
 my $label = Gtk3::Label->new($message);
 my $icon = Gtk3::Image->new_from_file($icon_img); 
 #   $label->set_justify('left');
-     $box_base->pack_start($icon, 1, 0, 0);
+     #$box_head->pack_start($icon, 1, 0, 0);
+     $box_head->pack_start($icon, 0, 0, 0);
+     $box_base->pack_start($box_head, 1, 0, 0);
      $box_base->pack_start($label, 1, 0, 0);
+    # $box_base->pack_start($box_head, 0, 0, 0);
+     $box_button->pack_end($button_ok, 0, 0, 0);
 
-print  `pwd`;	
+     $box_base->pack_start($box_button, 0, 0, 0);
 $window->add ($box_base);
 $window->show_all;
 Gtk3->main;

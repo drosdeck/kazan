@@ -4,7 +4,8 @@ use strict;
 use warnings;
 #use kazan_create_alert;  # import default list of items.
 my @test = @ARGV;
-grep {/--type=/i} @ARGV or die "--type  dont defided in paramters list\n";
+#grep {/--type=/i} @ARGV or die "--type  dont defided in paramters list\n";
+(grep {/--type=/i} @ARGV)  or   usage();
 #my $str = shift;
 my $type = (split /=/, shift) [1];
     print "$type\n";
@@ -16,5 +17,22 @@ if (grep {/alert/i} $type )
      export_gui( @ARGV );
      exit 0;
    }
+
+sub usage{
+
+   print "kazan --type=alert [options]\n";
+   print "options: 
+        \t--message
+        \t--height
+        \t--width
+        \t--icon
+        \t--title
+        \t--unclose\n";
+  print  "\nexample: "; 
+   print "/kazan.pl --type=alert --message=message --title=my_title\n";
+   exit 0;
+}
+ 
+
 
  #export_gui( @ARGV );
