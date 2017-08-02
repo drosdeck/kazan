@@ -22,13 +22,13 @@ sub usage{
 
    print "kazan --type=alert [options]\n";
    print "options: 
-        \t--message
-        \t--height
-        \t--width
-        \t--icon
-        \t--title
-        \t--button
-        \t--unclose\n";
+        \t--message=string
+        \t--height=number
+        \t--width=number
+        \t--icon=path to icon
+        \t--title=string
+        \t--button=string
+        \t--unclose=true|TRUE|false|FALSE\n";
   print  "\nexample: "; 
    print "/kazan.pl --type=alert --message=message --title=my_title\n";
    exit 0;
