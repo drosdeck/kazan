@@ -2,7 +2,6 @@
 
 use strict;
 use warnings;
-
 #use kazan_create_alert;  # import default list of items.
 my @test = @ARGV;
 grep {/--type=/i} @ARGV or die "--type  dont defided in paramters list\n";
@@ -12,8 +11,8 @@ my $type = (split /=/, shift) [1];
 
 if (grep {/alert/i} $type )
    {
-     
-    use kazan_create_alert;  # import default list of items.
+    use lib  './kazan';
+    use kazan::kazan_create_alert; 
      export_gui( @ARGV );
      exit 0;
    }
