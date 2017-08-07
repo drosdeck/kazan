@@ -15,6 +15,8 @@ our @EXPORT = qw( export_gui );
 
 sub export_gui {
    my $exit=0;
+
+             my $button_ok_enable = 0;     
    my $message="default message";
    my $title="alert";	
    my $height=100;
@@ -53,7 +55,7 @@ sub export_gui {
          }  if ( grep{/--button=/i} $loop)
          {
              $button_title = (split /=/, $loop) [1];
-                
+              $button_ok_enable = 1;     
          }  
          if ( grep{/--unclose=/i} $loop)
          {
@@ -107,8 +109,10 @@ my $icon = Gtk3::Image->new_from_file($icon_img);
      $box_base->pack_start($label, 1, 0, 0);
      if ($check == 0 ){ $box_base->pack_start($checkbutton, 1, 0, 0);}
     # $box_base->pack_start($box_head, 0, 0, 0);
+     if ($button_ok_enable == 1){
+     print "entro nesssee ifffff\n";
      $box_button->pack_end($button_ok, 0, 0, 0);
-
+     }
      $box_base->pack_start($box_button, 0, 0, 0);
 $window->add ($box_base);
 $window->show_all;
