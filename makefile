@@ -1,4 +1,4 @@
 install:
 	@cp -f kazan.pl /usr/bin/kazan
 	@chmod +x /usr/bin/kazan		
-	@cp -rf kazan /usr/share
+	@cp -rf kazan /etc/perl
