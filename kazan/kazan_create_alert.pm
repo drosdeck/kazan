@@ -4,7 +4,7 @@ use warnings;
 use Exporter;
 
 use Gtk3 -init;
-
+ use Encode qw(decode encode);
 our @ISA= qw( Exporter );
 
 # these CAN be exported.
@@ -87,20 +87,19 @@ sub export_gui {
 $window->set_deletable ($unclose);  
 $window->signal_connect (delete_event => sub { exit $exit });
 $window->set_default_size ($width,$height);
-$window->set_title($title);
+$window->set_title(decode('utf-8', $title));
 $window->set_border_width(5);
 
-my $button_ok = Gtk3::Button->new($button_title);
+my $button_ok = Gtk3::Button->new(decode('utf-8', $button_title));
  $button_ok->signal_connect("clicked" => sub{$exit++; exit $exit});
-
-
-
+          
+#my $string= decode('utf-8', $check_label);
 my $box_base = Gtk3::VBox->new(0, 0);
 my $box_head = Gtk3::VBox->new(0, 0);
 my $box_button = Gtk3::HBox->new(0, 0);
-my $label = Gtk3::Label->new($message);
+my $label = Gtk3::Label->new(decode('utf-8', $message));
 my $icon = Gtk3::Image->new_from_file($icon_img); 
- my $checkbutton = Gtk3::CheckButton->new_with_label($check_label);
+ my $checkbutton = Gtk3::CheckButton->new_with_label(decode('utf-8', $check_label));
 #   $label->set_justify('left');
      #$box_head->pack_start($icon, 1, 0, 0);
      $box_head->pack_start($icon, 0, 0, 0);
