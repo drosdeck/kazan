@@ -28,6 +28,7 @@ sub usage{
         \t--icon=path to icon
         \t--title=string
         \t--button=string
+        \t--button_cancel=string
         \t--check=string
         \t--unclose=true|TRUE|false|FALSE\n";
   print  "\nexample: "; 

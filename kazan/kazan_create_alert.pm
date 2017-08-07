@@ -16,7 +16,9 @@ our @EXPORT = qw( export_gui );
 sub export_gui {
    my $exit=0;
 
-             my $button_ok_enable = 0;     
+             my $button_ok_enable = 0;    
+ 
+              my $button_cancel_enable = 0;     
    my $message="default message";
    my $title="alert";	
    my $height=100;
@@ -25,6 +27,7 @@ sub export_gui {
    my $check=1;
    my $check_label="check where";
    my $button_title="Exit";
+   my $button_cancel_title="Cancel";
    my $icon_img="/usr/share/kazan/icons/dialog-warning.png";
    foreach my $loop (@ARGV) { 
          if ( grep{/--message/i} $loop)
@@ -52,10 +55,14 @@ sub export_gui {
          {
              $title = (split /=/, $loop) [1];
                 
-         }  if ( grep{/--button=/i} $loop)
+         }   if ( grep{/--button=/i} $loop)
          {
              $button_title = (split /=/, $loop) [1];
               $button_ok_enable = 1;     
+         }  if ( grep{/--button_cancel=/i} $loop)
+         {
+             $button_cancel_title = (split /=/, $loop) [1];
+              $button_cancel_enable = 1;     
          }  
          if ( grep{/--unclose=/i} $loop)
          {
@@ -93,6 +100,7 @@ $window->set_title(decode('utf-8', $title));
 $window->set_border_width(5);
 
 my $button_ok = Gtk3::Button->new(decode('utf-8', $button_title));
+my $button_cancel = Gtk3::Button->new(decode('utf-8', $button_cancel_title));
  $button_ok->signal_connect("clicked" => sub{$exit++; exit $exit});
           
 #my $string= decode('utf-8', $check_label);
@@ -110,9 +118,12 @@ my $icon = Gtk3::Image->new_from_file($icon_img);
      if ($check == 0 ){ $box_base->pack_start($checkbutton, 1, 0, 0);}
     # $box_base->pack_start($box_head, 0, 0, 0);
      if ($button_ok_enable == 1){
-     print "entro nesssee ifffff\n";
+    # print "entro nesssee ifffff\n";
      $box_button->pack_end($button_ok, 0, 0, 0);
      }
+     if ($button_cancel_enable == 1){
+     $box_button->pack_end($button_cancel, 0, 0, 0);
+      }
      $box_base->pack_start($box_button, 0, 0, 0);
 $window->add ($box_base);
 $window->show_all;
